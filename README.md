@@ -66,7 +66,7 @@ mysql:8.0
 
 La base de datos la puedes abrir en MySQL Workbench con los parámetros de conexión de arriba, y se verá así:
 <div align="center">
-<img width="600" alt="bd" src="[https://github.com/user-attachments/assets/2742e274-4ac6-4f9a-91f8-33f98f85b3e3](https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/workbench.png?raw=true)" />
+<img width="600" alt="bd" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/workbench.png" />
 </div>
 
 ⚠️ Importante: Fíjate en el puerto, porque el código de ambos microservicios está apuntando al puerto 3008 para conectarse a MySQL.

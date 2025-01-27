@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  micro-doctores:
+    build:
+      context: ./micro-doctores
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/sisdb_examen
+      - SPRING_DATASOURCE_USERNAME=root123
+      - SPRING_DATASOURCE_PASSWORD=abcd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - TZ=America/Guayaquil # Ajustar la zona horaria de Ecuador
+    networks:
+      - host
+
+  micro-pacientes:
+    build:
+      context: ./micro-pacientes
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/sisdb_examen
+      - SPRING_DATASOURCE_USERNAME=root123
+      - SPRING_DATASOURCE_PASSWORD=abcd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - TZ=America/Guayaquil # Ajustar la zona horaria de Ecuador
+    networks:
+      - host
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-micro-spring
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: abcd
+      TZ: "America/Guayaquil" #Ajustar a la zona horaria de Ecuador
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - host
+
+networks:
+  host:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

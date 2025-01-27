@@ -69,13 +69,8 @@ La base de datos la puedes abrir en MySQL Workbench con los parámetros de conex
 
 ---
 
-**micro-usuarios define su *application.properties* de esta forma:**
-<div align="center">
-<img width="600" alt="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/application.png" />
-</div>
-<br>
 
-**micro-roles define su *application.properties* de esta forma:**
+**micro-doctor, y pacientes define su *application.properties* de esta forma:**
 <div align="center">
 <img width="600" alt="micro-roles" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/application.png" />
 </div>

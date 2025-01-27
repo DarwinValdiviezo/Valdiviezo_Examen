@@ -1,4 +1,4 @@
-# Evaluación Conjunta del Segundo Parcial 😔
+# Evaluación Conjunta del Segundo Parcial efesita
 
 Este proyecto forma parte de la **Evaluación Conjunta del Segundo Parcial** y consiste en la implementación de un sistema basado en microservicios para la **gestión de roles y usuarios**. Incluye funcionalidades clave como la asignación, revocación y listado de roles asociados a usuarios, además de persistencia en una base de datos MySQL alojada en Docker.
 

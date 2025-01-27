@@ -1,6 +1,6 @@
 # Evaluación Conjunta del Segundo Parcial efesita
 
-Este proyecto forma parte de la **Evaluación Conjunta del Segundo Parcial** y consiste en la implementación de un sistema basado en microservicios para la **gestión de roles y usuarios**. Incluye funcionalidades clave como la asignación, revocación y listado de roles asociados a usuarios, además de persistencia en una base de datos MySQL alojada en Docker.
+Este proyecto forma parte de la **Evaluación Conjunta del Segundo Parcial** y consiste en la implementación de un sistema basado en microservicios para la **gestión de Doctores y Pacientes**. Incluye funcionalidades clave como la asignación, desasignación y listado de Dcotores junto a sus pacientes y listado de pacientes, además de persistencia en una base de datos MySQL alojada en Docker.
 
 ---
 
@@ -10,40 +10,42 @@ Este proyecto forma parte de la **Evaluación Conjunta del Segundo Parcial** y c
 - **MySQL**: Base de datos relacional.
 - **Docker**: Contenedor para la base de datos MySQL.
 - **RestTemplate** y **Feign Client**: Comunicación entre microservicios.
-- **Lombok**: Para simplificar el código con anotaciones.
 - **Maven**: Gestión de dependencias.
 
 ---
 
 ## ⚙️ **Funcionalidades del Sistema**
 
-### 🟢 Microservicio `micro-roles`
-- **CRUD de roles**: Crear, listar, actualizar y eliminar roles.
+### 🟢 Microservicio `micro-doctores`
+- **CRUD de Doctor**: Crear, listar, actualizar y eliminar doctores.
 - **Gestión de relaciones muchos a muchos**:
-  - Asignar roles a un usuario.
-  - Revocar roles de un usuario.
-  - Listar los roles asociados a un usuario.
-  - Listar usuarios que tienen un rol específico.
+  - Asignar doctores a un paciente.
+  - Desasignar doctores a un paciente.
+  - Listar los pacientes de un doctor.
+  - Listar los doctores.
 - **Persistencia en MySQL**: Los datos se almacenan de forma estructurada y pueden ser consultados posteriormente.
 
-### 🔵 Microservicio `micro-usuarios`
-- **Gestión de usuarios**: CRUD básico para usuarios.
-- **Comunicación entre microservicios**: Los usuarios se integran con el microservicio `micro-roles`.
+### 🔵 Microservicio `micro-pacientes`
+- **Gestión de pacientes**: CRUD básico para pacientes.
+- **Comunicación entre microservicios**: Los pacientes se integran con el microservicio `micro-doctores`.
 
 ---
 
 ## 📁 **Estructura del Proyecto**
 
-### `micro-roles`
-- `controller`: Controladores REST para manejar las operaciones de roles y asignaciones.
-- `service`: Lógica de negocio para la gestión de roles.
-- `model.entity`: Entidades de la base de datos (`Rol` y `Usuario`).
-- `repository`: Interfaces JPA para interactuar con MySQL.
-- `clients`: Cliente Feign para la comunicación con `micro-usuarios`.
+### `micro-doctores`
+- **`controller`**: Controladores REST que exponen las rutas necesarias para la gestión de doctores y su relación con los pacientes (CRUD de doctores, asignación y desasignación de pacientes).
+- **`service`**: Lógica de negocio para la gestión de doctores y la asignación de pacientes.
+- **`model.entity`**: Entidades de la base de datos que representan la relación entre doctores y pacientes (Doctor y PacienteDoctor).
+- **`repository`**: Interfaces JPA para interactuar con la base de datos MySQL, donde se guardan los datos de los doctores.
+- **`clients`**: Cliente Feign para la comunicación con el microservicio `micro-pacientes` para obtener la información de los pacientes.
 
-### `micro-usuarios`
-- Estructura similar a `micro-roles`, con funcionalidades específicas para la gestión de usuarios.
-
+### `micro-pacientes`
+- **`controller`**: Controladores REST que exponen las rutas para la gestión de pacientes.
+- **`service`**: Lógica de negocio para la creación, actualización y eliminación de pacientes.
+- **`model.entity`**: Entidades que representan a los pacientes en la base de datos.
+- **`repository`**: Interfaces JPA para interactuar con la base de datos MySQL, donde se guardan los datos de los pacientes.
+  
 ---
 
 ## 🚀 **Instrucciones de Ejecución**

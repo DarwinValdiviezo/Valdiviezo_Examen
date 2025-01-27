@@ -55,18 +55,18 @@ Se ejecuta el siguiente comando para crear un contenedor MySQL:
 
 ```bash
 docker run -d \
---name bd_almeida \
+--name mysql-container \
 -e MYSQL_ROOT_PASSWORD=abcd \
 -e MYSQL_DATABASE=sisdb_examen \
 -e MYSQL_USER=root123 \
 -e MYSQL_PASSWORD=abcd \
--p 3308:3306 \
+-p 3307:3306 \
 mysql:8.0
 ```
 
 La base de datos la puedes abrir en MySQL Workbench con los parámetros de conexión de arriba, y se verá así:
 <div align="center">
-<img width="600" alt="bd" src="https://github.com/user-attachments/assets/2742e274-4ac6-4f9a-91f8-33f98f85b3e3" />
+<img width="600" alt="bd" src="[https://github.com/user-attachments/assets/2742e274-4ac6-4f9a-91f8-33f98f85b3e3](https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/workbench.png?raw=true)" />
 </div>
 
 ⚠️ Importante: Fíjate en el puerto, porque el código de ambos microservicios está apuntando al puerto 3008 para conectarse a MySQL.

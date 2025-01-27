@@ -34,19 +34,17 @@ Este proyecto forma parte de la **Evaluación Conjunta del Segundo Parcial** y c
 ## 📁 **Estructura del Proyecto**
 
 ### `micro-doctores`
-- **`controller`**: Controladores REST que exponen las rutas necesarias para la gestión de doctores y su relación con los pacientes (CRUD de doctores, asignación y desasignación de pacientes).
-- **`service`**: Lógica de negocio para la gestión de doctores y la asignación de pacientes.
-- **`model.entity`**: Entidades de la base de datos que representan la relación entre doctores y pacientes (Doctor y PacienteDoctor).
-- **`repository`**: Interfaces JPA para interactuar con la base de datos MySQL, donde se guardan los datos de los doctores.
-- **`clients`**: Cliente Feign para la comunicación con el microservicio `micro-pacientes` para obtener la información de los pacientes.
+- `controller`: Controladores REST para manejar las operaciones de doctores, pacientes, y asignaciones.
+- `service`: Lógica de negocio para la gestión de doctores y pacientes.
+- `model.entity`: Entidades de la base de datos (`Doctor`, `Paciente`, `PacienteDoctor`).
+- `repository`: Interfaces JPA para interactuar con MySQL.
+- `clients`: Cliente Feign para la comunicación con `micro-pacientes`.
 
 ### `micro-pacientes`
-- **`controller`**: Controladores REST que exponen las rutas para la gestión de pacientes.
-- **`service`**: Lógica de negocio para la creación, actualización y eliminación de pacientes.
-- **`model.entity`**: Entidades que representan a los pacientes en la base de datos.
-- **`repository`**: Interfaces JPA para interactuar con la base de datos MySQL, donde se guardan los datos de los pacientes.
-  
+- Estructura similar a `micro-doctores`, con funcionalidades específicas para la gestión de pacientes.
+
 ---
+
 
 ## 🚀 **Instrucciones de Ejecución**
 
@@ -69,101 +67,106 @@ La base de datos la puedes abrir en MySQL Workbench con los parámetros de conex
 <img width="600" alt="bd" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/workbench.png" />
 </div>
 
-⚠️ Importante: Fíjate en el puerto, porque el código de ambos microservicios está apuntando al puerto 3008 para conectarse a MySQL.
 ---
 
 **micro-usuarios define su *application.properties* de esta forma:**
 <div align="center">
-<img width="600" alt="micro-usuarios" src="https://github.com/user-attachments/assets/265ffca3-67a5-4223-97b7-c131773d4736" />
+<img width="600" alt="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/application.png" />
 </div>
 <br>
 
 **micro-roles define su *application.properties* de esta forma:**
 <div align="center">
-<img width="600" alt="micro-roles" src="https://github.com/user-attachments/assets/f41224bd-dc21-41d1-8f49-f91cc9968d9c" />
+<img width="600" alt="micro-roles" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/application.png" />
 </div>
 
 ### 2. **Levantar los Microservicios**
 
 1. Clona el repositorio y navega al directorio raíz.
-2. En cada microservicio (`micro-roles` y `micro-usuarios`), compila y ejecuta:
-  ```bash
-  mvn spring-boot:run
-  ```
+2. En cada microservicio (`micro-doctores` y `micro-pacientes`), compila y ejecuta:
+   ```bash
+   mvn spring-boot:run
+    ```
+
 3. Los microservicios estarán disponibles en:
-  - `micro-roles`: http://localhost:8003/api/roles
-  - `micro-usuarios`: http://localhost:8002/api/usuarios
+  - `micro-doctor`: http://localhost:8001/api/doctores
+  - `micro-paciente`: http://localhost:8002/api/pacientes
 
 ### 3. **Pruebas de Funcionalidad**
 
-### USUARIOS
+### PACIENTES
 
-- Listar los usuarios disponibles:
-  - **GET:** http://localhost:8002/api/usuarios
+- Listar los pacientes disponibles:
+  - **GET:** http://localhost:8002/api/pacientes
 
 <div align="center">
-<img width="600" alt="ver_usuarios" src="https://github.com/user-attachments/assets/0321bb2e-6c91-4b21-84fc-004694ca52a3" />
+<img width="600" alt="ver_usuarios" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/get-pac.png" />
 </div>
 <br>
 
-- Crear un usuario:
-  - **POST:** http://localhost:8002/api/usuarios
+- Crear un paciente:
+  - **POST:** http://localhost:8002/api/pacientes
     ```json
     {
-      "nombre": "Pepe",
-      "apellido": "Bottles",
-      "email": "pepe@chimi.com",
-      "fechaNacimiento": "2002-04-16",
-      "telefono": "0982343722"
+    "nombre": "Ana",
+    "apellido": "Martinez",
+    "email": "ana.martinez@ejemplo.com",
+    "fechaNacimiento": "1990-05-15",
+    "telefono": "0987654323"
     }
     ```
 <div align="center">
-<img width="600" alt="crear_user" src="https://github.com/user-attachments/assets/0f1089f8-7091-40d7-a454-3a97d2669765" />
+<img width="600" alt="crear_user" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/post-pac.png" />
 </div>
 <br>
   
-- Eliminar un usuario:
-  - **DELETE:** http://localhost:8002/api/usuarios/{usuarioId}
+- Eliminar un paciente:
+  - **DELETE:** http://localhost:8002/api/pacientes/{pacienteId}
 
 <div align="center">
-<img width="600" alt="elim_user" src="https://github.com/user-attachments/assets/ade122b8-46ea-4e5e-96b8-5f6955ea37a5" />
+<img width="600" alt="elim_user" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/delete-pac.png" />
 </div>
 <br>
 
-### ROLES
+### DOCTORES
 
-- Listar los roles disponibles, y los usuarios que están asignados:
-  - **GET:** http://localhost:8003/api/roles
+- Listar los doctores disponibles, y los pacientes que están asignados:
+  - **GET:** http://localhost:8003/api/doctores
 
 <div align="center">
-<img width="600" alt="ver_rol" src="https://github.com/user-attachments/assets/9a58fb87-9f45-440f-be45-6b8303b92cc0" />
+<img width="600" alt="ver_rol" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/get-doc.png" />
 </div>
 <br>
 
-- Crear un rol:
-  - **POST:** http://localhost:8003/api/roles
+- Crear un doctor:
+  - **POST:** http://localhost:8003/api/doctores
     ```json
     {
-     "nombre": "DB Administrator 6",
-     "descripcion": "Admin de las BD hehe"
+      "nombre": "Doctor Patricio",
+      "apellido": "Real",
+      "email": "doctorrealpatricio@ejemplo.com",
+      "licencia": "98588",
+      "especialidad": "Cardiología",
+      "telefono": "0987654511"
     }
+
     ```
 
 <div align="center">
-<img width="600" alt="crear_rol" src="https://github.com/user-attachments/assets/1bee6415-cd1a-4798-ad45-6bfbdc0008cd" />
+<img width="600" alt="crear_rol" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/1.png" />
 </div>
 <br>
 
-- Eliminar un rol:
-  - **DELETE:** hhttp://localhost:8003/api/roles/{rolId}
+- Eliminar un doctor:
+  - **DELETE:** http://localhost:8001/api/doctores/{doctorId}
     
 <div align="center">
-<img width="600" alt="elim_rol" src="https://github.com/user-attachments/assets/e4f0deca-7bb7-4208-beb0-131f38058a71" />
+<img width="600" alt="elim_rol" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/delete-doc.png" />
 </div>
 <br>
 
-- Asignar un rol a un usuario:
-  - **POST:** http://localhost:8003/api/roles/asignar-rol/{rolId}
+- Asignar un paciente a un doctor:
+  - **POST:** http://localhost:8001/api/doctores/{doctorId}/asignar-paciente/{pacienteId}
     ```json
     {
      "id": 3
@@ -171,36 +174,25 @@ La base de datos la puedes abrir en MySQL Workbench con los parámetros de conex
     ```
 
 <div align="center">
-<img width="600" alt="asign_rol" src="https://github.com/user-attachments/assets/5b79b04b-7e82-4653-9038-412f73080349" />
+<img width="600" alt="asign_rol" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/post-asig.png" />
 </div>
 <br>
 
-- Revocar rol a un usuario:
-  - **DELETE:** http://localhost:8003/api/roles/desasignar-rol/{rolId}/usuario/{usuarioId}
+- Revocar paciente a un doctor:
+  - **DELETE:** http://localhost:8001/api/doctores/{doctorId}/desmatricular-paciente/{pacienteId}
 
 <div align="center">
-<img width="600" alt="revocar_rol" src="https://github.com/user-attachments/assets/573618a0-3972-4c42-913b-3249b7735b5e" />
+<img width="600" alt="revocar_rol" src="https://github.com/DarwinValdiviezo/Valdiviezo_Examen/blob/main/Capturas/delete-asig.png" />
 </div>
 <br>
 
 ---
-## 🛠️ Pruebas con Postman
-Se ha incluido una colección de Postman (`Roles_Postman.json`) para probar las funcionalidades de los microservicios de forma rápida. Importa los archivo en Postman y prueba las rutas disponibles.
 
 ## 💻 Tecnologías Utilizadas
 - Spring Boot: Para la creación de los microservicios.
 - Spring Security: Para la gestión de autenticación y autorización.
 - Spring Data JPA: Para la gestión de acceso a la base de datos.
 - MySQL: Base de datos relacional.
-
-## Contribuciones
-Si deseas contribuir, por favor sigue estos pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama para tus cambios (git checkout -b feature/mi-nueva-caracteristica).
-3. Realiza tus cambios y haz un commit (git commit -am 'Añadir nueva característica').
-4. Haz un push a tu rama (git push origin feature/mi-nueva-caracteristica).
-5. Abre un Pull Request.
 
 ## Licencia
 Este proyecto está bajo la licencia MIT. 
